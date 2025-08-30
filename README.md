@@ -6,31 +6,37 @@ my-small-repo/
 ├── README.md
 ├── requirements.txt
 └── main.py
-# My Small Repo
+import tkinter as tk
+from tkinter import messagebox
 
-This is a minimal example repository for GitHub.  
+# Predefined login credentials
+USERNAME = "admin"
+PASSWORD = "1234"
 
-## How to Run
-```bash
-python main.py
-pip install -r requirements.txt
----
+def login():
+    user = entry_user.get()
+    pwd = entry_pass.get()
 
-### 📄 main.py
-```python
-def hello():
-    print("Hello, GitHub!")
+    if user == USERNAME and pwd == PASSWORD:
+        messagebox.showinfo("Login", f"✅ Welcome {user}!")
+    else:
+        messagebox.showerror("Login", "❌ Invalid username or password")
 
-if __name__ == "__main__":
-    hello()
-# Add dependencies here
-__pycache__/
-*.pyc
-.env
-MIT License
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/USERNAME/my-small-repo.git
-git push -u origin main
+# Window
+root = tk.Tk()
+root.title("Login Page")
+root.geometry("300x200")
+
+# Labels & Entries
+tk.Label(root, text="Username:").pack(pady=5)
+entry_user = tk.Entry(root)
+entry_user.pack()
+
+tk.Label(root, text="Password:").pack(pady=5)
+entry_pass = tk.Entry(root, show="*")
+entry_pass.pack()
+
+# Login Button
+tk.Button(root, text="Login", command=login).pack(pady=15)
+
+root.mainloop()
